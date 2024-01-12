@@ -1,3 +1,6 @@
+// **Script en Rust con Explicaciones**
+
+```rust
 // Comienza la función principal del programa
 fn main() {
     // Solicita al usuario que ingrese la abreviatura de su moneda digital favorita
@@ -31,6 +34,7 @@ fn get_precio(coin: &str) -> Result<String, ureq::Error> {
     // Retorna el cuerpo de la respuesta como un Resultado exitoso
     Ok(body)
 }
+
 
 1. **`fn main() {`**: 
    - Define la función principal del programa.
