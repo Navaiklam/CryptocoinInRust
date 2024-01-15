@@ -60,7 +60,7 @@ fn get_precio(coin: &str, symbol: &str) -> Result<String, ureq::Error> {
     Ok(parsed[&sy].to_string())
 }
 
-
+```
 
 # Experiencia de Depuración en Rust
 
