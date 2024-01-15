@@ -1,28 +1,71 @@
-use serde_json::Value;
+use serde_json::{Value, Error};
+
+fn r_menu() -> Result<i32, Error>{
+    Ok(1)
+}
 
 
 fn main() {
+
+    match r_menu() {
+        Ok(_menu) => {
+            // Imprime las opciones del menú
+            println!("1 - Precio crypto");
+            println!("2 - Exit");
+
+            // Lee la opción del usuario
+            let mut menu = String::new();
+            std::io::stdin().read_line(&mut menu).expect("Error al leer la opción");
+
+            // Parsea la opción a un número entero
+            let menu: u32 = menu.trim().parse().expect("Error al parsear la opción");
+
+            // Realiza acciones según la opción seleccionada
+            match menu {
+                1 => {
+                    // Opción para obtener el precio de una criptomoneda
+                    option_lastprice();
+                }
+                2 => {
+                    // Opción para salir del programa
+                    println!("Salir");
+                }
+                _ => {
+                    // Opción no válida
+                    println!("Opción no válida. Por favor, elija una opción válida.");
+                    main();
+                }
+            }
+        }
+        Err(error) => println!("Error: {}", error),
+    }
+}
+
+
+fn option_lastprice(){
     println!("Ingrese la abreviatura de su moneda digital favoritas, como BTC, ETH, LTC");
     let mut coin: String = String::new();
     let _ = std::io::stdin()
-                .read_line(&mut coin)
-                .expect("ocurrio un error anda a saber qué onda");
+        .read_line(&mut coin)
+        .expect("Ocurrió un error, anda a saber qué onda");
 
     println!("Ingrese el Symbol de la moneda");
     let mut symbol: String = String::new();
     let _ = std::io::stdin()
-                .read_line(&mut symbol)
-                .expect("ocurrio un error anda a saber qué onda");
+        .read_line(&mut symbol)
+        .expect("Ocurrió un error, anda a saber qué onda");
 
     let r_precio: Result<String, ureq::Error> = get_precio(&coin, &symbol);
-    
+
     match r_precio {
         Ok(precio) => println!("El precio actual es: {} en {}", &precio, &symbol),
         Err(error) => println!("Error: {}", error),
-       
-        }
-   
+    }
+    main();
+
 }
+
+
 fn get_precio(coin: &str, symbol: &str) -> Result<String, ureq::Error> {
     let sy = symbol.trim();
     dbg!(sy);
