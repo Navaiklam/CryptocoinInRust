@@ -26,6 +26,7 @@ fn main() {
 fn get_precio(coin: &str, symbol: &str) -> Result<String, ureq::Error> {
     let sy = symbol.trim();
     dbg!(sy);
+    dbg!(symbol);
     let body: String = ureq::get(&format!("https://min-api.cryptocompare.com/data/price?fsym={}&tsyms={}", &coin, &sy))
         .call()?
         .into_string()?;
