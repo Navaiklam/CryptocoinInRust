@@ -6,39 +6,48 @@ fn r_menu() -> Result<i32, Error>{
 
 
 fn main() {
-
-    match r_menu() {
-        Ok(_menu) => {
-            // Imprime las opciones del menú
-            println!("1 - Precio crypto");
-            println!("2 - Exit");
-
-            // Lee la opción del usuario
-            let mut menu = String::new();
-            std::io::stdin().read_line(&mut menu).expect("Error al leer la opción");
-
-            // Parsea la opción a un número entero
-            let menu: u32 = menu.trim().parse().expect("Error al parsear la opción");
-
-            // Realiza acciones según la opción seleccionada
-            match menu {
-                1 => {
-                    // Opción para obtener el precio de una criptomoneda
-                    option_lastprice();
-                }
-                2 => {
-                    // Opción para salir del programa
-                    println!("Salir");
-                }
-                _ => {
-                    // Opción no válida
-                    println!("Opción no válida. Por favor, elija una opción válida.");
-                    main();
+    loop {
+        match r_menu() {
+            Ok(_menu) => {
+                // Imprime las opciones del menú
+                println!("1 - Precio crypto");
+                println!("2 - Exit");
+    
+                // Lee la opción del usuario
+                let mut menu_input = String::new();
+                std::io::stdin().read_line(&mut menu_input).expect("Error al leer la opción");
+    
+                // Parsea la opción a un número entero
+                let menu: u32 = match menu_input.trim().parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("Sólo debes de ingresar un número");
+                        continue;
+                    }
+                };
+    
+                // Realiza acciones según la opción seleccionada
+                match menu {
+                    1 => {
+                        // Opción para obtener el precio de una criptomoneda
+                        option_lastprice();
+                    }
+                    2 => {
+                        // Opción para salir del programa
+                        println!("Salir");
+                        break;
+                    }
+                    _ => {
+                        // Opción no válida
+                        println!("Opción no válida. Por favor, elija una opción válida.");
+                        continue;
+                    }
                 }
             }
+            Err(error) => println!("Error: {}", error),
         }
-        Err(error) => println!("Error: {}", error),
     }
+    
 }
 
 
