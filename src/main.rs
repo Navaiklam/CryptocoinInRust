@@ -71,7 +71,6 @@ fn option_lastprice(){
         Err(error) => println!("Error: {}", error),
     }
     main();
-
 }
 
 
