@@ -35,7 +35,7 @@ fn main() {
                     2 => {
                         // Opción para salir del programa
                         println!("Salir");
-                        break;
+                        std::process::exit(0);
                     }
                     _ => {
                         // Opción no válida
