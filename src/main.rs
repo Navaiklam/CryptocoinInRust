@@ -70,7 +70,7 @@ fn option_lastprice(){
         Ok(precio) => println!("El precio actual es: {} en {}", &precio, &symbol),
         Err(error) => println!("Error: {}", error),
     }
-    main();
+   
 }
 
 
